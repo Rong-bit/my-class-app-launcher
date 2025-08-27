@@ -1,45 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <!-- V2 修正：在第一行就強制指定 UTF-8 編碼，解決中文亂碼問題 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>班級公告系統</title>
     
-    <!-- PWA Manifest (直接內嵌，簡化部署) -->
     <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAibmFtZSI6ICLnjovng63loKDlkb3nvoTlubPlj7AiLA0KICAic2hvcnRfbmFtZSI6ICLnjovng63loKDlkb0iLA0KICAic3RhcnRfdXJsIjogIi4iLA0KICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2YwZjJmNSIsDQogICJ0aGVtZV9jb2xvciI6ICIjMjE5M2IwIiwNCiAgImRlc2NyaXB0aW9uIjogIuS4reiovuWAoOWRvSDlsZ/lsYDjgIFle+8g55u457O7IOe+hOW5s+WPsC4iLA0KICAiaWNvbnMiOiBbDQogICAgew0KICAgICAgInNyYyI6ICJodHRwczovL3d3dy5nc3RhdGljLmNvbS9pbWFnZXMvYnJhbmRpbmcvcHJvZHVjdC8xeC9zaGVldHNfMjAyMHE0XzE5MmRwLnBuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogImh0dHBzOi8vd3d3LmdzdGF0aWMuY29tL2ltYWdlcy9icmFuZGluZy9wcm9kdWN0LzF4L3NoZWV0c18yMDIwcTRfNTEyZHAucG5nIiwNCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9DQogIF0NCn0=">
-
-    <!-- Theme Color for browsers -->
     <meta name="theme-color" content="#2193b0"/>
-    
-    <!-- iOS specific tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="班級公告">
-    
-    <!-- App Icons -->
     <link rel="apple-touch-icon" href="https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_192dp.png">
     <link rel="icon" href="https://www.gstatic.com/images/branding/product/1x/docs_48dp.png">
 
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f0f2f5; }
         iframe { width: 100%; height: 100%; border: none; }
-        #loader {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            transition: opacity 0.5s ease;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #ccc;
-            border-top-color: #2193b0;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        #loader { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; transition: opacity 0.5s ease; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #ccc; border-top-color: #2193b0; border-radius: 50%; animation: spin 1s linear infinite; }
         #loader p { color: #555; margin-top: 1rem; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
@@ -69,11 +47,11 @@
             }, 500);
         };
         
-        // Service Worker 註冊
+        // V2 修正：註冊 Service Worker 時加入版本參數，強制更新快取
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('sw.js?v=2')
                 .then(function(registration) {
-                    console.log('Service Worker 註冊成功:', registration);
+                    console.log('Service Worker v2 註冊成功:', registration);
                 })
                 .catch(function(error) {
                     console.log('Service Worker 註冊失敗:', error);
