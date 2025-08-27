@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>班級公告系統</title>
+    <!-- 標題由下方的 JavaScript 動態設定，以避免任何編碼問題 -->
+    <title></title> 
     
-    <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAibmFtZSI6ICLnjovng63loKDlkb3nvoTlubPlj7AiLA0KICAic2hvcnRfbmFtZSI6ICLnjovng63loKDlkb0iLA0KICAic3RhcnRfdXJsIjogIi4iLA0KICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwNCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2YwZjJmNSIsDQogICJ0aGVtZV9jb2xvciI6ICIjMjE5M2IwIiwNCiAgImRlc2NyaXB0aW9uIjogIuS4reiovuWAoOWRvSDlsZ/lsYDjgIFle+8g55u457O7IOe+hOW5s+WPsC4iLA0KICAiaWNvbnMiOiBbDQogICAgew0KICAgICAgInNyYyI6ICJodHRwczovL3d3dy5nc3RhdGljLmNvbS9pbWFnZXMvYnJhbmRpbmcvcHJvZHVjdC8xeC9zaGVldHNfMjAyMHE0XzE5MmRwLnBuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogImh0dHBzOi8vd3d3LmdzdGF0aWMuY29tL2ltYWdlcy9icmFuZGluZy9wcm9kdWN0LzF4L3NoZWV0c18yMDIwcTRfNTEyZHAucG5nIiwNCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9DQogIF0NCn0=">
+    <link rel="manifest" href="data:application/manifest+json;base64,ew0KICAibmFtZSI6ICLnjovng63loKDlkb3nvoTlubPlj7AiLA0KICAic2hvcnRfbmFtZSI6ICLnjovng63loKDlkb0iLA0KICAic3RhcnRfdXJsIjogIi4iLA0KICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwNCiAgImJhY-r9fY29sb3IiOiAiI2YwZjJmNSIsDQogICJ0aGVtZV9jb2xvciI6ICIjMjE5M2IwIiwNCiAgImRlc2NyaXB0aW9uIjogIuS4reiovuWAoOWRvSDlsZ/lsYDjgIFle+8g55u457O7IOe+hOW5s+WPsC4iLA0KICAiaWNvbnMiOiBbDQogICAgew0KICAgICAgInNyYyI6ICJodHRwczovL3d3dy5nc3RhdGljLmNvbS9pbWFnZXMvYnJhbmRpbmcvcHJvZHVjdC8xeC9zaGVldHNfMjAyMHE0XzE5MmRwLnBuZyIsDQogICAgICAic2l6ZXMiOiAiMTkyeDE5MiIsDQogICAgICAidHlwZSI6ICJpbWFnZS9wbmciDQogICAgfSwNCiAgICB7DQogICAgICAic3JjIjogImh0dHBzOi8vd3d3LmdzdGF0aWMuY29tL2ltYWdlcy9icmFuZGluZy9wcm9kdWN0LzF4L3NoZWV0c18yMDIwcTRfNTEyZHAucG5nIiwNCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwNCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyINCiAgICB9DQogIF0NCn0=">
     <meta name="theme-color" content="#2193b0"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,6 +32,9 @@
     <iframe id="app-frame" style="display:none;"></iframe>
 
     <script>
+        // 終極修正：使用 JavaScript 動態設定標題，避免 HTML 編碼問題
+        document.title = '班級公告系統';
+
         // !! 將這裡的 URL 換成您自己的 Apps Script 網址 !!
         const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbwQrDte2xrBZQ1AkfUhFepuJcpxeq2fMtK1fahskebsEsnPptLZuIv5I6SqWWgVzihO/exec';
         
@@ -47,11 +51,10 @@
             }, 500);
         };
         
-        // V2 修正：註冊 Service Worker 時加入版本參數，強制更新快取
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js?v=2')
+            navigator.serviceWorker.register('sw.js?v=3') // 再次更新版本號以強制清除快取
                 .then(function(registration) {
-                    console.log('Service Worker v2 註冊成功:', registration);
+                    console.log('Service Worker v3 註冊成功:', registration);
                 })
                 .catch(function(error) {
                     console.log('Service Worker 註冊失敗:', error);
